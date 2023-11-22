@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES</title>
+  <!-- Thêm thư viện crypto-js từ CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+</head>
+<body>
+
+<!-- Giao diện người dùng -->
+<div>
+  <label for="textInput">Nhập chuỗi văn bản:</label>
+  <input type="text" id="textInput">
+  <button onclick="encryptText()">Mã hóa AES</button>
+</div>
+
+<!-- Kết quả -->
+<div id="result"></div>
+
+<script>
+// Hàm mã hóa AES
+function encryptText() {
+  // Lấy giá trị từ ô input
+  const inputText = document.getElementById('textInput').value;
+
+  // Kiểm tra xem người dùng đã nhập chuỗi hay chưa
+  if (!inputText) {
+    alert('Vui lòng nhập chuỗi văn bản.');
+    return;
+  }
+  const secretKey = 'YOUR_SECRET_KEY';
+
+  // Mã hóa chuỗi văn bản bằng AES
+  const encryptedText = CryptoJS.AES.encrypt(inputText, secretKey).toString();
+
+  // Hiển thị kết quả
+  document.getElementById('result').innerHTML = `
+    <p>Chuỗi ban đầu: ${inputText}</p>
+    <p>Mã hóa AES: ${encryptedText}</p>
+  `;
+}
+</script>
+
+</body>
+</html>

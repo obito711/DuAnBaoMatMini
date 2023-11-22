@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSA</title>
+  <!-- Thêm thư viện jsencrypt từ CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+</head>
+<body>
+
+<!-- Giao diện người dùng -->
+<div>
+  <label for="textInput">Nhập chuỗi văn bản:</label>
+  <input type="text" id="textInput">
+  <button onclick="encryptText()">Mã hóa RSA</button>
+</div>
+
+<!-- Kết quả -->
+<div id="result"></div>
+
+<script>
+// Hàm mã hóa RSA
+function encryptText() {
+  // Lấy giá trị từ ô input
+  const inputText = document.getElementById('textInput').value;
+
+  // Kiểm tra xem người dùng đã nhập chuỗi hay chưa
+  if (!inputText) {
+    alert('Vui lòng nhập chuỗi văn bản.');
+    return;
+  }
+
+  // Tạo một đối tượng RSA
+  const rsa = new JSEncrypt();
+ 
+  const publicKey = 'YOUR_PUBLIC_KEY';
+  rsa.setPublicKey(publicKey);
+
+  // Mã hóa chuỗi văn bản
+  const encryptedText = rsa.encrypt(inputText);
+
+  // Hiển thị kết quả
+  document.getElementById('result').innerHTML = `
+    <p>Chuỗi ban đầu: ${inputText}</p>
+    <p>Mã hóa RSA: ${encryptedText}</p>
+  `;
+}
+</script>
+
+</body>
+</html>
